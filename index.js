@@ -1,30 +1,35 @@
-var ListReporter = function(baseReporterDecorator, formatError, runSlow) {
-  baseReporterDecorator(this, formatError, runSlow);
+var ListReporter,
+    MESSAGE = '%s: %s %s\r\n'
+    util = require('util');
+
+ListReporter = function(baseReporterDecorator, formatError) {
+  baseReporterDecorator(this, formatError);
 
   var onSpecCompleteOriginal = this.onSpecComplete;
 
   this.onSpecComplete = function(browser, result) {
-    var status;
+    var status,
+        specName = result.suite.join(' ') + ' ' + result.description;;
 
     if (result.success) {
-      status = 'success';
+      status = 'SUCCESS';
     }
     else if (result.skipped) {
-      status = 'skipped';
+      status = 'SKIPPED';
     }
     else {
-      status = 'failure';
+      status = 'FAILURE';
     }
 
-    this.writeCommonMsg(result.description + ': ' + status);
+    this.writeCommonMsg(util.format(MESSAGE, status, specName, result.description));
 
     onSpecCompleteOriginal.call(this, browser, result);
   };
 };
 
-ListReporter.$inject = ['baseReporterDecorator', 'formatError', 'runSlow'];
+ListReporter.$inject = ['baseReporterDecorator', 'formatError'];
 
 // PUBLISH DI MODULE
 module.exports = {
-  'reporter:listy': ['type', ListReporter]
+  'reporter:list': ['type', ListReporter]
 };
