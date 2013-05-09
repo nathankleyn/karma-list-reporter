@@ -1,0 +1,23 @@
+{
+  "name": "karma-list-reporter",
+  "version": "0.0.1",
+  "description": "A Karma plugin. Report results in a list format.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nathankleyn/karma-list-reporter.git"
+  },
+  "keywords": [
+    "karma-plugin",
+    "reporter",
+    "list"
+  ],
+  "author": "Nathan Kleyn <nathan@nathankleyn.com>",
+  "peerDependencies": {
+    "karma": "~0.9"
+  },
+  "license": "MIT"
+}
