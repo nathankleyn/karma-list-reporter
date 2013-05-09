@@ -1,5 +1,5 @@
 var ListReporter,
-    MESSAGE = '%s: %s %s\r\n'
+    MESSAGE = '%s: %s\r\n'
     util = require('util');
 
 ListReporter = function(baseReporterDecorator, formatError) {
@@ -21,7 +21,7 @@ ListReporter = function(baseReporterDecorator, formatError) {
       status = 'FAILURE';
     }
 
-    this.writeCommonMsg(util.format(MESSAGE, status, specName, result.description));
+    this.writeCommonMsg(util.format(MESSAGE, status, specName));
 
     onSpecCompleteOriginal.call(this, browser, result);
   };
